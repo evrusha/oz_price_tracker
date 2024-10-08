@@ -17,6 +17,9 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'rubocop-rails', '~> 2.26', '>= 2.26.2', require: false
 gem 'rubocop-rspec', '~> 3.1', require: false
 
+gem 'bootstrap', '~> 5.3', '>= 5.3.3'
+gem 'dartsass-sprockets', '~> 3.1'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'
