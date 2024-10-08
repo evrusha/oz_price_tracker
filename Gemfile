@@ -17,8 +17,13 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'
+  gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 end
 
 group :development do
   gem "web-console"
+end
+
+group :test do
+  gem 'simplecov', '~> 0.22.0', require: false
 end
