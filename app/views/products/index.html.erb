@@ -1,1 +1,4 @@
-abc
+<%= form_with url: products_path, method: :post do |form| %>
+  <%= form.text_area :urls %>
+  <%= form.submit "Search" %>
+<% end %>
