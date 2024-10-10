@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top bg-body-tertiary">
   <form class="container-fluid justify-content-start">
-    <button class="btn btn-outline-success me-2" type="button">Scrap</button>
-    <button class="btn btn-sm btn-outline-secondary" type="button">Statistics</button>
+    <%= link_to "Scrap", root_path, class: "btn btn-outline-success me-2" %>
+    <%= link_to "Statistics", statistics_products_path, class: "btn btn-sm btn-outline-secondary" %>
   </form>
 </nav>

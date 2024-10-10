@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  def statistics; end
+
   private
 
   def extract_urls_from_params
