@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static targets = ["toast"]
+
   connect() {
-    this.element.textContent = "Hello World!"
+    this.toast = new bootstrap.Toast(this.toastTarget).show()
   }
 }

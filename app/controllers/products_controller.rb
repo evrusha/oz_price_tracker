@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    urls = extract_urls_from_params(params[:urls])
+    @urls = params[:urls]
+    urls = extract_urls_from_params(@urls)
     invalid_urls = []
     urls.each do |url|
       category_link = CategoryLink.new(url:)
@@ -13,7 +14,7 @@ class ProductsController < ApplicationController
 
     if invalid_urls.any?
       flash[:error] = "Invalid URLs: #{invalid_urls.join(', ')}"
-      render :index
+      render :index, status: :unprocessable_content
     else
       products_data = fetch_products_data_from_urls(urls)
       @products = Product.insert_all(products_data)
