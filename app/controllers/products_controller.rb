@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     else
       products_data = fetch_products_data_from_urls(urls)
       @products = Product.insert_all(products_data)
-      flash[:success] = 'Scraped successfully'
+      flash[:success] = t('.success')
       redirect_to root_path
     end
   end

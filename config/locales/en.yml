@@ -3,3 +3,7 @@ en:
     errors:
       messages:
         url_uniq_scrape: "Can only be submitted once every 3 hours"
+  products:
+    create:
+      success: "Scraped successfully"
+
