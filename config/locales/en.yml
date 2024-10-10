@@ -6,4 +6,4 @@ en:
   products:
     create:
       success: "Scraped successfully"
-
+      warning: "No products data"

@@ -7,12 +7,20 @@ class ProductsController < ApplicationController
     urls = extract_urls_from_params
     invalid_urls = validate_category_links(urls)
 
-    if invalid_urls.any?
+    if invalid_urls.present?
       flash[:error] = format_error_messages(invalid_urls)
       render :index, status: :unprocessable_content
     else
-      save_category_links_and_products
-      flash[:success] = t('.success')
+      CategoryLink.transaction do
+        @category_links.each(&:save)
+      end
+      products_data = fetch_products_data_from_category_links
+      if products_data.present?
+        save_products_with_price_history(products_data)
+        flash[:success] = t('.success')
+      else
+        flash[:warning] = t('.warning')
+      end
       redirect_to root_path
     end
   end
@@ -34,14 +42,6 @@ class ProductsController < ApplicationController
         invalid_urls[url] = category_link.errors.full_messages
       end
     end
-  end
-
-  def save_category_links_and_products
-    CategoryLink.transaction do
-      @category_links.each(&:save)
-    end
-    products_data = fetch_products_data_from_category_links
-    save_products_with_price_history(products_data)
   end
 
   def fetch_products_data_from_category_links
