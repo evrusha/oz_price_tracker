@@ -6,14 +6,18 @@ class ProductsController < ApplicationController
   def create
     @urls = params[:urls]
     urls = extract_urls_from_params(@urls)
-    invalid_urls = []
+    invalid_urls = {}
+
     urls.each do |url|
-      category_link = CategoryLink.new(url:)
-      invalid_urls << url unless category_link.save
+      category_link = CategoryLink.find_or_initialize_by(url:)
+      invalid_urls[url] = category_link.errors.full_messages unless category_link.save
+      category_link.touch if category_link.persisted?
     end
 
     if invalid_urls.any?
-      flash[:error] = "Invalid URLs: #{invalid_urls.join(', ')}"
+      flash[:error] = invalid_urls.map do |url, messages|
+        "URL: #{url} - Errors: #{messages.join(', ')}"
+      end
       render :index, status: :unprocessable_content
     else
       products_data = fetch_products_data_from_urls(urls)

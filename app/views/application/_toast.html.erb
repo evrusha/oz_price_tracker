@@ -1,6 +1,6 @@
 <% flash.each do |type, msg| %>
   <div class="position-fixed bottom-0 end-0 p-3" data-controller="toast">
-    <div class="toast
+    <div class="toast w-auto
                 <%= 'bg-success text-light' if type == 'success' %>
                 <%= 'bg-danger text-light' if type == 'error' %>
                 <%= 'bg-warning text-light' if type == 'warning' %>
@@ -12,7 +12,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div class="toast-body">
-        <%= msg %>
+        <ul>
+          <% msg.each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
