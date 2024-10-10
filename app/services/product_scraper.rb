@@ -57,6 +57,7 @@ class ProductScraper
 
   def extract_product_info(article)
     {
+      oz_id: extract_oz_id(article),
       name: extract_name(article),
       link: extract_link(article),
       price: extract_price(article),
@@ -64,6 +65,10 @@ class ProductScraper
     }
   rescue StandardError => e
     Rails.logger.error("Error processing article: #{e.message}")
+  end
+
+  def extract_oz_id(article)
+    article['data-value']
   end
 
   def extract_image_url(article)
