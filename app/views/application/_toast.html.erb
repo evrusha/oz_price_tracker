@@ -12,11 +12,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div class="toast-body">
-        <ul>
-          <% msg.each do |e| %>
-            <li><%= e %></li>
-          <% end %>
-        </ul>
+        <% if msg.is_a?(Array) %>
+          <ul>
+            <% msg.each do |e| %>
+              <li><%= e %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <%= msg %>
+        <% end %>
       </div>
     </div>
   </div>
