@@ -23,6 +23,8 @@ gem 'dartsass-sprockets', '~> 3.1'
 gem 'httparty', '~> 0.22.0'
 gem 'nokogiri', '~> 1.16', '>= 1.16.7'
 
+gem 'validate_url', '~> 1.0', '>= 1.0.15'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'

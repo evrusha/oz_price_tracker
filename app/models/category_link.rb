@@ -1,6 +1,5 @@
 class CategoryLink < ApplicationRecord
-  validates :url, presence: true, uniqueness: true,
-                  format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }
+  validates :url, presence: true, uniqueness: true, url: true
   validate :url_must_belong_to_oz_by
   validate :url_mustnt_scraped_within_last_three_hours, if: :persisted?
 
