@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
-  def index
-    @products = Product.all
-  end
+  def index; end
 
   def create
     urls = extract_urls_from_params
@@ -25,7 +23,25 @@ class ProductsController < ApplicationController
     end
   end
 
-  def statistics; end
+  def statistics
+    info = params[:info]
+    if params[:info].present?
+      start_date = params[:start_date].to_date
+      end_date = params[:end_date].to_date
+      @date_range = start_date..end_date
+      @products = statistics_products(info)
+      if @products.present?
+        @result = @products.average_price_by_date(start_date, end_date)
+      else
+        flash[:warning] = t('.warning')
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
 
   private
 
@@ -52,8 +68,14 @@ class ProductsController < ApplicationController
 
   def save_products_with_price_history(products_data)
     products_data.each do |product_data|
-      product = Product.create_with(product_data).find_or_initialize_by(oz_id: product_data[:oz_id])
-      if product.persisted? && product.price != product_data[:price]
+      product = begin
+        Product.create_with(product_data).find_or_initialize_by(oz_id: product_data[:oz_id])
+      rescue StandardError => e
+        Rails.logger.error e.message
+      end
+      if product.new_record?
+        PriceHistory.create!(product:, price_old: nil, price_new: product_data[:price])
+      elsif product.price != product_data[:price]
         PriceHistory.create!(product:, price_old: product.price, price_new: product_data[:price])
         product.price = product_data[:price]
       end
@@ -64,6 +86,14 @@ class ProductsController < ApplicationController
   def format_error_messages(invalid_urls)
     invalid_urls.map do |url, messages|
       "URL: #{url} - Errors: #{messages.join(', ')}"
+    end
+  end
+
+  def statistics_products(info)
+    if CategoryLink.find_or_initialize_by(url: info).valid?
+      Product.where(link: info)
+    else
+      Product.where('name LIKE ?', "#{Product.sanitize_sql_like(info)}%")
     end
   end
 end

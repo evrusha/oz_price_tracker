@@ -1,1 +1,22 @@
 <h2 class="text-center mb-4">Statistics</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with url: statistics_products_path, method: :get do |form| %>
+        <div class="input-group mb-3">
+          <%= form.text_field :info, class: "form-control", placeholder: "Info", aria_label: "Info", required: true %>
+        </div>
+        <div class="input-group mb-3">
+          <%= form.date_field :start_date, class: "form-control", required: true %>
+          <%= form.date_field :end_date, class: "form-control", required: true %>
+        </div>
+        <%= form.submit "Search", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <% if @result.present? %>
+      <%= render partial: 'statistics_table', locals: { result: @result, date_range: @date_range } %>
+    <% else %>
+      <p class="text-center">Enter data</p>
+    <% end %>
+  </div>
+</div>

@@ -25,6 +25,8 @@ gem 'nokogiri', '~> 1.16', '>= 1.16.7'
 
 gem 'validate_url', '~> 1.0', '>= 1.0.15'
 
+gem 'pagy', '~> 9.1'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'

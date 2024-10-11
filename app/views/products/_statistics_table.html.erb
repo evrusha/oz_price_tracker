@@ -1,0 +1,26 @@
+<div style="overflow-x: auto;">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <% date_range.each do |date| %>
+        <th scope="col"><%= date.strftime("%Y-%m-%d") %></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    <% @result.each do |row| %>
+      <tr>
+        <td>
+          <%= link_to image_tag(row.image_url, size: '30x30'), row.link, target: "_blank" %>
+          <br>
+          <%= link_to row.name, row.link, target: "_blank" %>
+        </td>
+        <% row.average_prices.each do |avg_price| %>
+          <td><%= avg_price.present? ? avg_price : '-' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

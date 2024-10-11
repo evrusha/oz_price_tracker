@@ -7,3 +7,5 @@ en:
     create:
       success: "Scraped successfully"
       warning: "No products data"
+    statistics:
+      warning: "No products data"
