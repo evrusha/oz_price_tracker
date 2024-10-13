@@ -1,5 +1,5 @@
-<div style="overflow-x: auto;">
-  <table class="table">
+<% if @result.present? %>
+  <table class="table" style="overflow-x: auto;">
     <thead>
     <tr>
       <th scope="col">Product</th>
@@ -12,9 +12,9 @@
     <% @result.each do |row| %>
       <tr>
         <td>
-          <%= link_to image_tag(row.image_url, size: '30x30'), row.link, target: "_blank" %>
+          <%= link_to image_tag(row.image_url, size: '30x30'), row.link, target: '_blank' %>
           <br>
-          <%= link_to row.name, row.link, target: "_blank" %>
+          <%= link_to row.name, row.link, target: '_blank' %>
         </td>
         <% row.average_prices.each do |avg_price| %>
           <td><%= avg_price.present? ? avg_price : '-' %></td>
@@ -23,4 +23,8 @@
     <% end %>
     </tbody>
   </table>
-</div>
+<% else %>
+  <div class="alert alert-info text-center mt-3" role="alert">
+    No data
+  </div>
+<% end %>

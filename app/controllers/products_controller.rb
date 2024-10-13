@@ -29,12 +29,7 @@ class ProductsController < ApplicationController
       start_date = params[:start_date].to_date
       end_date = params[:end_date].to_date
       @date_range = start_date..end_date
-      @products = statistics_products(info)
-      if @products.present?
-        @result = @products.average_price_by_date(start_date, end_date)
-      else
-        flash[:warning] = t('.warning')
-      end
+      @result = statistics_products(info).average_price_by_date(start_date, end_date)
     end
 
     respond_to do |format|
