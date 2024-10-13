@@ -9,5 +9,6 @@ class Product < ApplicationRecord
       .where('DATE(price_histories.created_at) BETWEEN ? AND ?', start_date, end_date)
       .group(:id, :link, :name, :image_url)
       .select(:id, :link, :name, :image_url, "ARRAY[#{dates}] AS average_prices")
+      .order(:name)
   }
 end
