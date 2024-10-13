@@ -65,11 +65,7 @@ class ProductsController < ApplicationController
 
   def save_products_with_price_history(products_data)
     products_data.each do |product_data|
-      product = begin
-        Product.create_with(product_data).find_or_initialize_by(oz_id: product_data[:oz_id])
-      rescue StandardError => e
-        Rails.logger.error e.message
-      end
+      product = Product.create_with(product_data).find_or_initialize_by(oz_id: product_data[:oz_id])
       if product.new_record?
         PriceHistory.create!(product:, price_old: nil, price_new: product_data[:price])
       elsif product.price != product_data[:price]
@@ -78,6 +74,8 @@ class ProductsController < ApplicationController
       end
       product.save!
     end
+  rescue StandardError => e
+    Rails.logger.error e.message
   end
 
   def format_error_messages(invalid_urls)
@@ -90,7 +88,7 @@ class ProductsController < ApplicationController
     if CategoryLink.find_or_initialize_by(url: info).valid?
       Product.where(link: info)
     else
-      Product.where('name LIKE ?', "#{Product.sanitize_sql_like(info)}%")
+      Product.where('name LIKE ?', "%#{Product.sanitize_sql_like(info)}%")
     end
   end
 end
