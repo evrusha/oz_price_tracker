@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  include Pagy::Backend
+
   def index; end
 
   def create
@@ -25,11 +27,11 @@ class ProductsController < ApplicationController
 
   def statistics
     info = params[:info]
-    if params[:info].present?
+    if info.present?
       start_date = params[:start_date].to_date
       end_date = params[:end_date].to_date
       @date_range = start_date..end_date
-      @result = statistics_products(info).average_price_by_date(start_date, end_date)
+      @pagy, @result = pagy_countless(statistics_products(info).average_price_by_date(start_date, end_date), items: 20)
     end
 
     respond_to do |format|
