@@ -1,24 +1,60 @@
-# README
+# OZ Price Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web application which shows prices changes of selected goods from the OZ.BY shop.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+### Prerequisites
 
-* System dependencies
+You need to have installed in your system:
 
-* Configuration
+- RVM
+- Ruby 3.2.5
+- PostgreSQL 15
 
-* Database creation
+#### RVM Installation
 
-* Database initialization
+Install [RVM](https://rvm.io/).
 
-* How to run the test suite
+#### Ruby Installation
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rvm install 3.2.5
+```
 
-* Deployment instructions
+```
+rvm use 3.2.5
+```
 
-* ...
+#### PostgreSQL Installation
+
+Visit https://www.postgresql.org/download/.
+
+
+## Project Setup
+
+Clone project from GitHub:
+
+```
+git clone https://github.com/evrusha/oz_price_tracker.git
+```
+
+Navigate the project folder and run:
+
+```
+bundle
+```
+
+### Initialize project database settings
+
+```
+rails db:setup
+```
+
+### Run server
+
+```
+rails s
+```
+
+## Profit!!!
