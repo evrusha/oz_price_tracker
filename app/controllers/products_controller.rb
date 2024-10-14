@@ -26,17 +26,15 @@ class ProductsController < ApplicationController
   end
 
   def statistics
-    info = params[:info]
-    if info.present?
-      start_date = params[:start_date].to_date
-      end_date = params[:end_date].to_date
-      @date_range = start_date..end_date
-      @pagy, @result = pagy_countless(statistics_products(info).average_price_by_date(start_date, end_date), items: 20)
-    end
-
     respond_to do |format|
       format.html
-      format.turbo_stream
+      format.turbo_stream do
+        @info = params[:info]
+        @start_date = params[:start_date]&.to_date
+        @end_date = params[:end_date]&.to_date
+        @date_range = @start_date..@end_date
+        @pagy, @result = pagy(statistics_products(@info).average_price_by_date(@start_date, @end_date), limit: 10)
+      end
     end
   end
 

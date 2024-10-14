@@ -1,0 +1,22 @@
+<nav aria-label="Pagination">
+  <ul class="pagination justify-content-center">
+    <% if @pagy.prev %>
+      <li class="page-item">
+        <%= link_to 'Prev',
+                    statistics_products_path(page: @pagy.prev, info: @info, start_date: @start_date, end_date: @end_date),
+                    data: { turbo_stream: true }, class: 'page-link' %>
+      </li>
+    <% end %>
+    <li class="page-item active">
+      <span class="page-link"><%= @pagy.page %></span>
+    </li>
+    <% if @pagy.next %>
+      <li class="page-item">
+        <%= link_to 'Next',
+                    statistics_products_path(page: @pagy.next, info: @info, start_date: @start_date, end_date: @end_date),
+                    data: { turbo_stream: true }, class: 'page-link' %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+<p class="text-body-secondary"><%== pagy_info @pagy %></p>

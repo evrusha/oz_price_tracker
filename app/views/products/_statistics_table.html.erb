@@ -1,6 +1,6 @@
 <% if @result.present? %>
-  <table class="table" style="overflow-x: auto;">
-    <thead>
+  <table class="table table-striped table-hover mt-3" style="overflow-x: auto;">
+    <thead class="table-dark">
     <tr>
       <th scope="col">Product</th>
       <% date_range.each do |date| %>
@@ -8,16 +8,16 @@
       <% end %>
     </tr>
     </thead>
-    <tbody class="table-group-divider">
+    <tbody>
     <% @result.each do |row| %>
       <tr>
         <td>
-          <%= link_to image_tag(row.image_url, size: '30x30'), row.link, target: '_blank' %>
+          <%= link_to image_tag(row.image_url, size: '50x50'), row.link, target: '_blank', class: 'img-fluid' %>
           <br>
           <%= link_to row.name, row.link, target: '_blank' %>
         </td>
         <% row.average_prices.each do |avg_price| %>
-          <td><%= avg_price.present? ? avg_price : '-' %></td>
+          <td><%= avg_price.present? ? number_with_precision(avg_price, precision: 2) : '-' %></td>
         <% end %>
       </tr>
     <% end %>

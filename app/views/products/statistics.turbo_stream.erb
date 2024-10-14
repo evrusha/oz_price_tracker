@@ -1,1 +1,3 @@
-<%= turbo_stream.update 'statistics_table', partial: 'statistics_table', locals: { result: @result, date_range: @date_range } %>
+<%= turbo_stream.update 'statistics_table', partial: 'statistics_table',
+                        locals: { result: @result, date_range: @date_range } %>
+<%= turbo_stream.update 'table_pagination', partial: 'pagination' %>
