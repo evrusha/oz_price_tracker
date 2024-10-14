@@ -51,10 +51,16 @@ bundle
 rails db:setup
 ```
 
-### Run server
+### Run web server
 
 ```
 rails s
+```
+
+### Run sidekiq server
+
+```
+bundle exec sidekiq
 ```
 
 ## Profit!!!

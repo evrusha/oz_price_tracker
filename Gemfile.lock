@@ -142,6 +142,7 @@ GEM
       activesupport (>= 5.0.0)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
+    logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -231,6 +232,8 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.9.2)
     reline (0.5.10)
       io-console (~> 0.5)
@@ -275,6 +278,12 @@ GEM
       google-protobuf (~> 4.27)
     sassc-embedded (1.79.0)
       sass-embedded (~> 1.79)
+    sidekiq (7.3.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -338,6 +347,7 @@ DEPENDENCIES
   rspec-rails (~> 7.0, >= 7.0.1)
   rubocop-rails (~> 2.26, >= 2.26.2)
   rubocop-rspec (~> 3.1)
+  sidekiq
   simplecov (~> 0.22.0)
   sprockets-rails
   stimulus-rails

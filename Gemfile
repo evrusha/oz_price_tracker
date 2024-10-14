@@ -27,6 +27,8 @@ gem 'validate_url', '~> 1.0', '>= 1.0.15'
 
 gem 'pagy', '~> 9.1'
 
+gem 'sidekiq'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'
