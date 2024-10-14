@@ -6,6 +6,7 @@ en:
   products:
     create:
       success: "Scraped successfully"
+      info: "Product creation is being processed. You will be notified once it is complete."
       warning: "No products data"
     statistics:
       warning: "No products data"

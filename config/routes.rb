@@ -8,4 +8,7 @@ Rails.application.routes.draw do
       get :statistics
     end
   end
+
+  require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
 end
