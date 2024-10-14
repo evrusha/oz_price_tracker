@@ -30,6 +30,9 @@ gem 'pagy', '~> 9.1'
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 end
 
