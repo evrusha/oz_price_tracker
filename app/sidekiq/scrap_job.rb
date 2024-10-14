@@ -3,10 +3,9 @@ class ScrapJob
 
   def perform(url)
     products_data = fetch_products_data_from_category_links(url)
-    if products_data.present?
-      save_products_with_price_history(products_data)
-    else
-    end
+    return if products_data.blank?
+
+    save_products_with_price_history(products_data)
   end
 
   private
